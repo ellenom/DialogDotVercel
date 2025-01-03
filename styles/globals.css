@@ -1,0 +1,342 @@
+/* Define Variables */
+:root {
+    /* Colors */
+    --bg-color: black;
+    --text-color: white;
+    --highlight-color: #FFD55D;
+    --footer-text-color: #aaa;
+
+    /* Base Size */
+    --base-size: 150px;
+
+    /* Icon Filters */
+    --mail-filter: invert(60%) sepia(35%) saturate(797%) hue-rotate(338deg) brightness(103%) contrast(101%);
+    --youtube-filter: invert(10%) sepia(90%) saturate(4252%) hue-rotate(355deg) brightness(88%) contrast(105%);
+    --instagram-filter: invert(76%) sepia(67%) saturate(335%) hue-rotate(64deg) brightness(92%) contrast(91%);
+    --x-filter: invert(80%) sepia(5%) saturate(6369%) hue-rotate(200deg) brightness(90%) contrast(87%);
+
+    /* Font Sizes */
+    --font-size-body: 1rem;
+    --font-size-animated: 2rem;
+    --font-size-footer: 12.5px;
+
+    /* Gaps and Margins */
+    --gap-small: 1.5rem;
+    --gap-large: 3rem;
+    --gap-mobile: 1rem;
+    --padding-mobile: 0.5rem;
+    --margin-social: 8rem;
+
+    /* SVG Base64 */
+    --svg-base64: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NjkuNSA2NDQuMDkiPjxwYXRoIGQ9Ik00NjkuNSwyMzQuNzVjMCw2NC44Mi0yNi4yNywxMjMuNTEtNjguNzYsMTY1Ljk5bC0yNDMuMzMsMjQzLjM1YzE3LjEtMjMuMzgsMjguNTMtNTMuNTgsMjguNTMtODQuNzYsMC01MS4xMy0yNy4xMi05NS45Mi02Ny43Ni0xMjAuNzctMS4zNi0uNzgtMi43MS0xLjU4LTQuMDYtMi4zOUM0NS43NSwzOTUuMTQsMCwzMjAuMjksMCwyMzQuNzUsMCwxMDUuMSwxMDUuMSwwLDIzNC43NSwwczIzNC43NSwxMDUuMSwyMzQuNzUsMjM0Ljc1WiIgZmlsbD0iI2ZmZDU1ZCIvPjwvc3ZnPg==");
+}
+
+/* Import Variable Font */
+@font-face {
+    font-family: 'LDIoaom_vb';
+    src: url('assets/LDIoaom_vb.woff2') format('woff2');
+    font-weight: 50 900;
+    font-style: normal;
+}
+
+/* Define CSS property for rotation angle */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'LDIoaom_vb', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0.5rem 4rem;
+    text-align: center;
+}
+
+/* Main Content Wrapper */
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    color: var(--highlight-color);
+}
+
+/* Main Container Styling */
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-small);
+    justify-content: center;
+    width: 90%;
+    max-width: 700px;
+}
+
+.left-child, .right-child {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Right child container positioning */
+.right-child {
+    max-width: 220px;
+    max-height: 200px;
+    width: 100%;
+    height: 300px;
+    justify-content: flex-start;
+    padding-left: 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-child {
+    max-width: 120px;
+    max-height: 120px;
+    width: 100%;
+    height: auto;
+    justify-content: flex-end;
+}
+
+/* Keyframes for rotating gradient */
+@keyframes rotate-gradient {
+  to {
+    --gradient-angle: 360deg;
+  }
+}
+
+/* New container to apply glow */
+/* Updated container with dynamic glow */
+.rotate-gradient-container {
+    position: absolute;
+    width: calc(var(--base-size) + 2px);
+    height: calc(var(--base-size) + 2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    z-index: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Pseudo-element for dynamic glow */
+.rotate-gradient-container::before {
+    content: '';
+    position: absolute;
+    width: 55%;
+    height: 55%;
+    border-radius: inherit;
+    background: conic-gradient(
+        from var(--gradient-angle),
+        red, orange, yellow, green, blue, indigo, violet, red
+    );
+    animation: rotate-gradient 3s linear infinite;
+    filter: blur(70px);
+    z-index: -1;
+}
+.rotate-gradient-container::after {
+    content: '';
+    position: absolute;
+    width: 55%;
+    height: 55%;
+    border-radius: inherit;
+    background: conic-gradient(
+        from var(--gradient-angle),
+        red, orange, yellow, green, blue, indigo, violet, red
+    );
+    animation: rotate-gradient 3s linear infinite;
+    filter: blur(25px);
+    z-index: -1;;
+}
+
+
+
+/* Rotating gradient background */
+.rotate-gradient {
+    position: absolute;
+    width: calc(var(--base-size) + 10px);
+    height: calc(var(--base-size) + 10px);
+    background: conic-gradient(
+        from var(--gradient-angle),
+        red, orange, yellow, green, blue, indigo, violet, red
+    );
+    animation: rotate-gradient 3s linear infinite;
+    border-radius: 1rem;
+    mask: var(--svg-base64) no-repeat center;
+    -webkit-mask: var(--svg-base64) no-repeat center;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    z-index: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(calc(-50% - 1px), calc(-50% + 1px)) rotate(2deg);
+}
+
+/* Main SVG shape */
+.svg-shape {
+    position: absolute;
+    width: var(--base-size);
+    height: var(--base-size);
+    background-color: #ffd55d;
+    mask: var(--svg-base64) no-repeat center;
+    -webkit-mask: var(--svg-base64) no-repeat center;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Animated Text */
+#animated-text {
+    font-variation-settings: "wght" 50;
+    animation: weightAnimation 2s infinite ease-in-out;
+    font-size: var(--font-size-animated);
+    text-align: left;
+}
+
+@keyframes weightAnimation {
+    0%, 100% {
+        font-variation-settings: "wght" 50;
+    }
+    50% {
+        font-variation-settings: "wght" 800;
+    }
+}
+
+/* Social Media Container */
+.social-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-large);
+    margin-top: var(--margin-social);
+}
+
+.social-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.2rem;
+    width: auto;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+    filter: none;
+}
+
+/* Individual Icon Styling */
+.social-icon.mail img {
+    height: 90%;
+    filter: var(--mail-filter);
+}
+
+.social-icon.youtube img {
+    height: 90%;
+    filter: var(--youtube-filter);
+}
+
+.social-icon.instagram img {
+    height: 100%;
+    filter: var(--instagram-filter);
+}
+
+.social-icon.x img {
+    height: 80%;
+    filter: var(--x-filter);
+}
+
+/* Hover Effect */
+.social-icon:hover {
+    transform: scale(1.4);
+}
+
+/* Footer Styling */
+footer {
+    padding: 1rem;
+    font-size: var(--font-size-footer);
+    font-weight: 100;
+    text-align: center;
+    color: var(--footer-text-color);
+    width: 100%;
+    letter-spacing: 0.02em;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* tsParticles Background Styling */
+#tsparticles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--bg-color);
+}
+
+/* Glow Enhancements */
+#animated-text {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    :root {
+        --base-size: 120px; /* Override base size for mobile */
+    }
+
+    .container {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: calc(var(--gap-mobile) * 3);
+    }
+
+    .right-child {
+        max-width: 160px;
+        height: 220px;
+        padding: var(--padding-mobile);
+        margin-bottom: 1rem;
+    }
+    
+    .left-child {
+        max-width: 100px;
+        max-height: 100px;
+        padding: var(--padding-mobile);
+        margin-top: 2rem;
+    }
+    
+    .left-child { 
+        justify-content: center;
+    }
+
+    #animated-text {
+        font-size: 1.5rem;
+    }
+}
